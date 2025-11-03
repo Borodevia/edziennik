@@ -1,0 +1,18 @@
+{
+  "exams-card": {
+    "label": "Upcoming tests",
+    "title": "Tests"
+  },
+  "grades-card": {
+    "header": "Grades",
+    "label": "Your latest grades"
+  },
+  "lesson-item": {
+    "canceled": "Canceled",
+    "room": "room",
+    "substitution": "Substitution"
+  },
+  "schedule-card": {
+    "title": "Schedule"
+  }
+}
