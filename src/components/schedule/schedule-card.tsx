@@ -2,14 +2,14 @@
 import { Card } from '@/components/ui/card';
 import {
   TypographyH2,
-  TypographyLead,
+  TypographyLarge,
   TypographyMedium,
 } from '@/components/ui/typography';
 import { useSchedule } from '@/hooks/use-schedule';
 import { ScheduleData } from '@/types/schedule';
 import { addDays, format, parseISO, subDays } from 'date-fns';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
@@ -75,9 +75,9 @@ export const ScheduleCard = ({
             {selectedDate !== normalizedToday && (
               <motion.div
                 key="today-btn"
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
+                exit={{ opacity: 0, y: 4 }}
                 transition={{ duration: 0.28, ease: 'easeOut' }}
               >
                 <ButtonGroup>
@@ -89,7 +89,7 @@ export const ScheduleCard = ({
             )}
           </AnimatePresence>
         </ButtonGroup>
-        <TypographyLead className="">{formattedDate}</TypographyLead>
+        <TypographyLarge className="">{formattedDate}</TypographyLarge>
       </div>
       <div className="flex flex-col overflow-y-auto gap-2">
         {todaysLessons.length > 0 ?
