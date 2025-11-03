@@ -26,7 +26,7 @@ const palette = {
       'bg-transparent hover:bg-gray-100/60 dark:bg-gray-900/20 text-gray-800 dark:text-gray-200 border-2',
     row: 'bg-gray-100/60 dark:bg-gray-700/20',
     rowAccent: 'border-gray-300/50  dark:border-gray-500/60',
-    selectedTint: 'bg-muted/20 border-border border-gray-300/70',
+    selectedTint: 'bg-muted/20 dark:bg-muted/50 border-border border-gray-300/30',
     focusRing: 'focus-visible:ring-gray-300/40',
     bigGrade: 'text-gray-700 dark:text-gray-200',
   },
