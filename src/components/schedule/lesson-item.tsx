@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { LessonWithException } from '@/types/schedule';
 import { AlertTriangle, XCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Card } from '../ui/card';
 import {
   TypographyExtraSmall,
@@ -20,6 +21,7 @@ const formatSecondsToTime = (seconds: number) => {
 };
 
 export function LessonItem({ lesson }: LessonItemProps) {
+  const t = useTranslations('lesson-item');
   const isCanceled = lesson.exception?.type == 'canceled';
   const isSubstitution = lesson.exception?.type == 'substitution';
 
@@ -68,7 +70,7 @@ export function LessonItem({ lesson }: LessonItemProps) {
           className={`mt-1 flex items-center justify-between font-light gap-2 text-sm `}
         >
           <TypographyExtraSmall className={strikeClass}>
-            {displayTeacher}, sala {displayRoom}
+            {displayTeacher}, {t('room')} {displayRoom}
           </TypographyExtraSmall>
 
           {isCanceled ?
@@ -77,14 +79,14 @@ export function LessonItem({ lesson }: LessonItemProps) {
               className={`gap-1 select-none ${accentColorClass} absolute right-2`}
             >
               <XCircle className="h-3 w-3" />
-              Odwołane
+              {t('canceled')}
             </Badge>
           : isSubstitution ?
             <Badge
               variant="default"
               className={`gap-1 select-none ${accentColorClass} absolute right-2`}
             >
-              <AlertTriangle className="h-3 w-3" /> Zastępstwo
+              <AlertTriangle className="h-3 w-3" /> {t('substitution')}
             </Badge>
           : null}
         </div>

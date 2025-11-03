@@ -10,6 +10,7 @@ import { ScheduleData } from '@/types/schedule';
 import { addDays, format, parseISO, subDays } from 'date-fns';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
@@ -21,6 +22,8 @@ type ScheduleCardProps = {
 };
 
 export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
+  const t = useTranslations('schedule-card');
+
   // Store date in ISO (yyyy-MM-dd)
   const normalizedToday =
     todayDate ? format(parseISO(todayDate), 'yyyy-MM-dd') : undefined;
@@ -57,7 +60,7 @@ export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
   };
   return (
     <Card className="row-span-2 p-6 flex flex-col min-h-0">
-      <TypographyH2 className="mb-4">Plan Lekcji</TypographyH2>
+      <TypographyH2 className="mb-4">{t('title')}</TypographyH2>
       <div className="flex justify-between">
         <ButtonGroup>
           <ButtonGroup>
