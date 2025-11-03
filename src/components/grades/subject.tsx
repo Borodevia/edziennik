@@ -77,7 +77,6 @@ function Subject({
     setDialogOpen(true);
   };
 
-  // use centralized styles
   const getStyles = (cat?: string) => stylesFor(cat);
 
   return (
@@ -114,51 +113,53 @@ function Subject({
                   ease: 'easeOut',
                   layout: { duration: 0.28, ease: 'easeOut' },
                 }}
-                className="overflow-hidden"
+                className="overflow-hidden rounded-md border border-gray-100 dark:border-gray-800"
               >
-                <Table className="overflow-hidden">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Ocena</TableHead>
-                      <TableHead>Kategoria</TableHead>
-                      <TableHead>Opis</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {item.grades.map((grade, gidx) => (
-                      <MotionTableRow
-                        key={gidx}
-                        initial={
-                          disableRowAnim ? false : { opacity: 0, x: -10 }
-                        }
-                        animate={{ opacity: 1, x: 0 }}
-                        layout={!disableRowAnim}
-                        transition={{
-                          delay: 0.1 * gidx * Math.max(0.3, 1 - gidx * 0.1),
-                        }}
-                        className={`duration-${gidx}`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          openDialogFor(gidx);
-                        }}
-                      >
-                        <TableCell
-                          className={`cursor-pointer ${getStyles(grade.category).rowAccentClasses}`}
+                <div className="overflow-hidden">
+                  <Table className="w-full overflow-hidden">
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Ocena</TableHead>
+                        <TableHead>Kategoria</TableHead>
+                        <TableHead>Opis</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {item.grades.map((grade, gidx) => (
+                        <MotionTableRow
+                          key={gidx}
+                          initial={
+                            disableRowAnim ? false : { opacity: 0, x: -10 }
+                          }
+                          animate={{ opacity: 1, x: 0 }}
+                          layout={!disableRowAnim}
+                          transition={{
+                            delay: 0.1 * gidx * Math.max(0.3, 1 - gidx * 0.1),
+                          }}
+                          className={`duration-${gidx}, ${getStyles(grade.category).rowClasses} `}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            openDialogFor(gidx);
+                          }}
                         >
-                          {grade.value}
-                        </TableCell>
-                        <TableCell className="cursor-pointer px-2 py-1">
-                          {grade.category}
-                        </TableCell>
-                        <TableCell className="cursor-pointer">
-                          {grade.description}
-                        </TableCell>
-                      </MotionTableRow>
-                    ))}
-                  </TableBody>
-                  <TableFooter></TableFooter>
-                </Table>
+                          <TableCell
+                            className={`cursor-pointer ${getStyles(grade.category).rowAccentClasses} `}
+                          >
+                            {grade.value}
+                          </TableCell>
+                          <TableCell className="cursor-pointer px-2 py-1">
+                            {grade.category}
+                          </TableCell>
+                          <TableCell className="cursor-pointer">
+                            {grade.description}
+                          </TableCell>
+                        </MotionTableRow>
+                      ))}
+                    </TableBody>
+                    <TableFooter></TableFooter>
+                  </Table>
+                </div>
               </motion.div>
             : <motion.ul layout className="list-none flex gap-2.5 flex-wrap">
                 {item.grades.map((grade, gidx) => (

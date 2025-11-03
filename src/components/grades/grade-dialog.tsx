@@ -82,7 +82,7 @@ export default function GradeDialog({
                       i === selected ?
                         `border-border bg-muted/70 ${s.selectedTintClasses}`
                       : 'border-transparent hover:bg-muted/30'
-                    } focus:outline-none focus:ring-2 focus:ring-ring ${s.focusRingClass}`}
+                    } focus:outline-none focus-visible:ring-2  ${s.focusRingClass}`}
                   >
                     <Badge
                       variant="outline"
