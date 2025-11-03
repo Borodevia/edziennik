@@ -18,7 +18,6 @@ import { Card } from '../ui/card';
 
 type SubjectProps = {
   item: SubjectGrades;
-  idx: number;
 };
 
 function Subject({ item }: SubjectProps): ReactElement {
@@ -31,7 +30,7 @@ function Subject({ item }: SubjectProps): ReactElement {
           <div className="font-semibold mb-2">{item.subject}</div>
 
           {isOpen ?
-            <Table className='overflow-hidden'>
+            <Table className="overflow-hidden">
               <TableHeader>
                 <TableRow>
                   <TableHead>Ocena</TableHead>

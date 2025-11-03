@@ -8,21 +8,20 @@ import {
   TypographySmall,
 } from '../ui/typography';
 
-interface LessonItemProps {
+type LessonItemProps = {
   lesson: LessonWithException;
-}
-
-const formatSecondsToTime = (seconds: number) => {
-  const date = new Date(seconds * 1000);
-  const hours = date.getUTCHours().toString().padStart(2, '0');
-  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-
-  return `${hours}:${minutes}`;
 };
 
-export const LessonItem = ({ lesson }: LessonItemProps) => {
-  const isCanceled = lesson.exception?.type === 'canceled';
-  const isSubstitution = lesson.exception?.type === 'substitution';
+const formatSecondsToTime = (seconds: number) => {
+  const date = new Date(0);
+  date.setSeconds(seconds);
+
+  return date.toISOString().substring(11, 16);
+};
+
+export function LessonItem({ lesson }: LessonItemProps) {
+  const isCanceled = lesson.exception?.type == 'canceled';
+  const isSubstitution = lesson.exception?.type == 'substitution';
 
   const displaySubject = lesson.exception?.newData?.subject ?? lesson.subject;
   const displayStart = lesson.exception?.newData?.start ?? lesson.start;
@@ -52,7 +51,7 @@ export const LessonItem = ({ lesson }: LessonItemProps) => {
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2">
             <TypographyMedium
-              className={`truncate font-semibold  ${strikeClass}`}
+              className={`truncate font-semibold ${strikeClass}`}
             >
               {displaySubject}
             </TypographyMedium>
@@ -92,4 +91,4 @@ export const LessonItem = ({ lesson }: LessonItemProps) => {
       </div>
     </Card>
   );
-};
+}

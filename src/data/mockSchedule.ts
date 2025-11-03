@@ -42,15 +42,6 @@ export const mockScheduleData: ScheduleData = {
     },
     // Wtorek
     {
-      id: 4,
-      day: 2,
-      start: 28800,
-      end: 31500,
-      room: '10',
-      teacher: 'M. Zieliński',
-      subject: 'Biologia',
-    },
-    {
       id: 5,
       day: 2,
       start: 31800,

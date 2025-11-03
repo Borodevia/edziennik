@@ -2,7 +2,7 @@
 import { Card } from '@/components/ui/card';
 import {
   TypographyH2,
-  TypographyLarge,
+  TypographyLead,
   TypographyMedium,
 } from '@/components/ui/typography';
 import { useSchedule } from '@/hooks/use-schedule';
@@ -15,16 +15,13 @@ import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
 import { LessonItem } from './lesson-item';
 
-interface ScheduleCardProps {
+type ScheduleCardProps = {
   scheduleData: ScheduleData;
   todayDate?: string;
-}
+};
 
-export const ScheduleCard = ({
-  scheduleData,
-  todayDate,
-}: ScheduleCardProps) => {
-  // Przechowuj datę w formacie ISO (yyyy-MM-dd)
+export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
+  // Store date in ISO (yyyy-MM-dd)
   const normalizedToday =
     todayDate ? format(parseISO(todayDate), 'yyyy-MM-dd') : undefined;
 
@@ -32,10 +29,10 @@ export const ScheduleCard = ({
     normalizedToday
   );
 
-  // Pobierz lekcje dla wybranej daty
+  // get lessons for selected date
   const { todaysLessons } = useSchedule(scheduleData, selectedDate);
 
-  // Formatuj do wyświetlenia
+  // format to show
   const formattedDate =
     selectedDate ? format(parseISO(selectedDate), 'dd.MM.yyyy') : '';
 
@@ -89,7 +86,7 @@ export const ScheduleCard = ({
             )}
           </AnimatePresence>
         </ButtonGroup>
-        <TypographyLarge className="">{formattedDate}</TypographyLarge>
+        <TypographyLead>{formattedDate}</TypographyLead>
       </div>
       <div className="flex flex-col overflow-y-auto gap-2">
         {todaysLessons.length > 0 ?
@@ -100,4 +97,4 @@ export const ScheduleCard = ({
       </div>
     </Card>
   );
-};
+}
