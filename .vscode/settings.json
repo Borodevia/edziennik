@@ -13,12 +13,10 @@
   },
   "editor.rulers": [80, 120],
   "editor.tabSize": 2,
-  "editor.trimAutoWhitespace": true,
   "eslint.enable": true,
   "eslint.format.enable": true,
   "files.encoding": "utf8",
   "files.eol": "\n",
-  "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
   "search.exclude": {
     "**/.vscode": true,
@@ -31,14 +29,16 @@
   },
   "prettier.bracketSameLine": false,
   "prettier.bracketSpacing": true,
-  "prettier.configPath": ".prettierrc",
   "prettier.enable": true,
-  "prettier.jsxSingleQuote": true,
+  "prettier.jsxSingleQuote": false,
   "prettier.printWidth": 80,
   "prettier.quoteProps": "as-needed",
   "prettier.semi": true,
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
-  "prettier.useTabs": false
+  "prettier.useTabs": false,
+  "prettier.embeddedLanguageFormatting": "auto",
+  "prettier.experimentalTernaries": true,
+  "prettier.configPath": ".prettierrc"
 }

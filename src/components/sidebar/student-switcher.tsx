@@ -19,19 +19,21 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 
-export function TeamSwitcher({
-  teams,
+export function StudentSwitcher({
+  students,
 }: {
-  teams: {
-    name: string;
+  students: {
+    school: string;
     logo: React.ElementType;
-    plan: string;
+    student: string;
+    id: number;
+    symbol: string;
   }[];
 }) {
   const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+  const [activeStudent, setActiveStudent] = React.useState(students[0]);
 
-  if (!activeTeam) {
+  if (!activeStudent) {
     return null;
   }
 
@@ -45,11 +47,13 @@ export function TeamSwitcher({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeTeam.logo className="size-4" />
+                <activeStudent.logo className="size-4" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{activeTeam.name}</span>
-                <span className="truncate text-xs">{activeTeam.plan}</span>
+                <span className="truncate font-medium">
+                  {activeStudent.student}
+                </span>
+                <span className="truncate text-xs">{activeStudent.school}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -63,17 +67,19 @@ export function TeamSwitcher({
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Teams
             </DropdownMenuLabel>
-            {teams.map((team, index) => (
+            {students.map((student) => (
               <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveTeam(team)}
+                key={student.id}
+                onClick={() => setActiveStudent(student)}
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-md border">
-                  <team.logo className="size-3.5 shrink-0" />
+                  <student.logo className="size-3.5 shrink-0" />
                 </div>
-                {team.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                {student.student}
+                <DropdownMenuShortcut className="leading-none font-medium">
+                  {student.symbol}
+                </DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
@@ -81,7 +87,9 @@ export function TeamSwitcher({
               <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
                 <Plus className="size-4" />
               </div>
-              <div className="text-muted-foreground font-medium">Add team</div>
+              <div className="text-muted-foreground font-medium">
+                Add student
+              </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
