@@ -23,6 +23,7 @@ updates:
     groups:
       security:
         applies-to: security-updates
+        patterns: ['*']
       dev-dependencies:
         dependency-type: 'development'
         applies-to: version-updates
