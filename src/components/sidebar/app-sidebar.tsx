@@ -1,5 +1,3 @@
-'use client';
-
 import { School } from 'lucide-react';
 import * as React from 'react';
 
