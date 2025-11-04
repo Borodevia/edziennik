@@ -22,27 +22,27 @@ updates:
       prefix-development: 'dev'
     groups:
       security:
-        applies-to: 'security-updates'
+        applies-to: security-updates
       dev-dependencies:
         dependency-type: 'development'
-        applies-to: 'version-updates'
+        applies-to: version-updates
       radix-ui:
         dependency-type: 'production'
-        applies-to: 'version-updates'
+        applies-to: version-updates
         patterns: ['@radix-ui/*']
       dependencies:
         dependency-type: 'production'
-        applies-to: 'version-updates'
+        applies-to: version-updates
         update-types:
           - "minor"
           - "patch"
   - package-ecosystem: 'devcontainers' # See documentation for possible values
     directory: '/.devcontainer/' # Location of package manifests
-    multi-ecosystem-group: 'github'
+    multi-ecosystem-group: github
     commit-message:
       prefix: 'codespaces'
   - package-ecosystem: 'github-actions'
     directory: '/.github/workflows'
-    multi-ecosystem-group: 'github'
+    multi-ecosystem-group: github
     commit-message:
       prefix: 'actions'
