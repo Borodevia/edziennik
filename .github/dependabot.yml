@@ -40,10 +40,12 @@ updates:
   - package-ecosystem: 'devcontainers' # See documentation for possible values
     directory: '/.devcontainer/' # Location of package manifests
     multi-ecosystem-group: github
+    patterns: ["*"]
     commit-message:
       prefix: 'codespaces'
   - package-ecosystem: 'github-actions'
     directory: '/.github/workflows'
     multi-ecosystem-group: github
+    patterns: ["*"]
     commit-message:
       prefix: 'actions'
