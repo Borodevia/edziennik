@@ -39,7 +39,7 @@ updates:
           - "minor"
           - "patch"
   - package-ecosystem: 'devcontainers' # See documentation for possible values
-    directory: '/.devcontainer/' # Location of package manifests
+    directory: '/.devcontainer' # Location of package manifests
     multi-ecosystem-group: github
     patterns: ["*"]
   - package-ecosystem: 'github-actions'
