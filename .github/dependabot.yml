@@ -8,8 +8,6 @@ multi-ecosystem-groups:
   - github:
     assignees: ['@Kjur0']
     open-pull-requests-limit: 1
-    commit-message:
-      prefix: 'gh'
     schedule:
       interval: 'weekly'
 updates:
@@ -43,10 +41,10 @@ updates:
     multi-ecosystem-group: github
     patterns: ["*"]
     commit-message:
-      prefix: 'codespaces'
+      prefix: "gh codespaces"
   - package-ecosystem: 'github-actions'
     directory: '/.github/workflows'
     multi-ecosystem-group: github
     patterns: ["*"]
     commit-message:
-      prefix: 'actions'
+      prefix: "gh actions"
