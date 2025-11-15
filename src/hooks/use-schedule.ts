@@ -1,16 +1,19 @@
 import { LessonWithException, ScheduleData } from '@/types/schedule';
-import { DateTime } from 'luxon';
+import { formatInTimeZone, toZonedTime } from 'date-fns-tz';
 
-export const useSchedule = (data: ScheduleData, currentDate?: string) => {
+export const useSchedule = (data: ScheduleData, currentDate?: Date) => {
   const { schoolTimezone, weeklySchedule, exceptions } = data;
 
-  const timeInSchool =
-    currentDate ?
-      DateTime.fromISO(currentDate, { zone: schoolTimezone })
-    : DateTime.now().setZone(schoolTimezone);
-
-  const dayOfWeek = timeInSchool.weekday;
-  const schoolDate = timeInSchool.toFormat('yyyy-MM-dd');
+  const referenceDate = currentDate ?? new Date();
+  const timeInSchool = toZonedTime(referenceDate, schoolTimezone);
+  const dayOfWeek = Number(
+    formatInTimeZone(referenceDate, schoolTimezone, 'i')
+  );
+  const schoolDate = formatInTimeZone(
+    referenceDate,
+    schoolTimezone,
+    'yyyy-MM-dd'
+  );
 
   const todaysLessons = weeklySchedule.filter(
     (lesson) => lesson.day === dayOfWeek

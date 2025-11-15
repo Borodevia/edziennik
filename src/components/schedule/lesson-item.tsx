@@ -42,7 +42,7 @@ export function LessonItem({ lesson }: LessonItemProps) {
 
   return (
     <Card
-      className={`relative w-[300px] p-3 transition-colors hover:shadow-sm rounded-sm h-20 ${bgColorClass}`}
+      className={`relative w-full p-3 transition-colors hover:shadow-sm rounded-sm h-20 ${bgColorClass}`}
     >
       <span
         aria-hidden

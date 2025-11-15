@@ -162,29 +162,11 @@ export const mockScheduleData: ScheduleData = {
       teacher: 'T. Wójcik',
       subject: 'Zajęcia sportowe',
     },
-    // Niedziela
-    {
-      id: 18,
-      day: 7,
-      start: 32400,
-      end: 35100,
-      room: '9',
-      teacher: 'L. Nowicki',
-      subject: 'Korepetycje z matematyki',
-    },
-    {
-      id: 19,
-      day: 7,
-      start: 35400,
-      end: 38100,
-      room: '10',
-      teacher: 'A. Kowalczyk',
-      subject: 'Warsztaty artystyczne',
-    },
+
   ],
   exceptions: [
     {
-      date: '2025-10-20',
+      date: '2025-11-20',
       type: 'substitution',
       lessonId: 2,
       newData: {
@@ -196,7 +178,7 @@ export const mockScheduleData: ScheduleData = {
       },
     },
     {
-      date: '2025-10-20',
+      date: '2025-11-20',
       type: 'canceled',
       lessonId: 3,
     },

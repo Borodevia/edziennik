@@ -13,6 +13,8 @@
     "substitution": "Substitution"
   },
   "schedule-card": {
-    "title": "Schedule"
+    "title": "Schedule",
+    "today": "Today",
+    "empty": "No lessons scheduled"
   }
 }

@@ -2,66 +2,84 @@
 import { Card } from '@/components/ui/card';
 import {
   TypographyH2,
-  TypographyLead,
+  TypographyLarge,
   TypographyMedium,
+  TypographyMuted,
 } from '@/components/ui/typography';
 import { useSchedule } from '@/hooks/use-schedule';
 import { ScheduleData } from '@/types/schedule';
-import { addDays, format, parseISO, subDays } from 'date-fns';
+import { addDays, format, parseISO } from 'date-fns';
+import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
 import { LessonItem } from './lesson-item';
 
 type ScheduleCardProps = {
   scheduleData: ScheduleData;
-  todayDate?: string;
+  todayDate?: Date;
 };
+
+const localDateString = (date: Date, timeZone: string) =>
+  formatInTimeZone(date, timeZone, 'yyyy-MM-dd');
+
+const getSchoolDayStart = (date: Date, timeZone: string) =>
+  fromZonedTime(`${localDateString(date, timeZone)}T00:00:00`, timeZone);
+
+const shiftSchoolDay = (date: Date, timeZone: string, offset: number) => {
+  const currentLocal = localDateString(date, timeZone);
+  const shiftedLocal = format(
+    addDays(parseISO(currentLocal), offset),
+    'yyyy-MM-dd'
+  );
+  return fromZonedTime(`${shiftedLocal}T00:00:00`, timeZone);
+};
+
+const isSameSchoolDay = (a: Date, b: Date, timeZone: string) =>
+  formatInTimeZone(a, timeZone, 'yyyy-MM-dd') ===
+  formatInTimeZone(b, timeZone, 'yyyy-MM-dd');
 
 export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
   const t = useTranslations('schedule-card');
-
-  // Store date in ISO (yyyy-MM-dd)
-  const normalizedToday =
-    todayDate ? format(parseISO(todayDate), 'yyyy-MM-dd') : undefined;
-
-  const [selectedDate, setSelectedDate] = useState<string | undefined>(
-    normalizedToday
+  const schoolTimezone = scheduleData.schoolTimezone;
+  const todayInSchool = useMemo(
+    () => getSchoolDayStart(todayDate ?? new Date(), schoolTimezone),
+    [todayDate, schoolTimezone]
   );
 
-  // get lessons for selected date
-  const { todaysLessons } = useSchedule(scheduleData, selectedDate);
+  const [selectedDate, setSelectedDate] = useState<Date>(todayInSchool);
 
-  // format to show
-  const formattedDate =
-    selectedDate ? format(parseISO(selectedDate), 'dd.MM.yyyy') : '';
+  const { todaysLessons } = useSchedule(scheduleData, selectedDate);
+  const formattedDay = formatInTimeZone(selectedDate, schoolTimezone, 'EEEE');
+  const formattedDate = formatInTimeZone(
+    selectedDate,
+    schoolTimezone,
+    'dd.MM.yyyy'
+  );
+  const isTodaySelected = isSameSchoolDay(
+    selectedDate,
+    todayInSchool,
+    schoolTimezone
+  );
 
   const handleToday = () => {
-    if (normalizedToday) {
-      setSelectedDate(normalizedToday);
-    }
+    setSelectedDate(todayInSchool);
   };
 
   const handlePreviousDay = () => {
-    if (selectedDate) {
-      const newDate = subDays(parseISO(selectedDate), 1);
-      setSelectedDate(format(newDate, 'yyyy-MM-dd'));
-    }
+    setSelectedDate((current) => shiftSchoolDay(current, schoolTimezone, -1));
   };
 
   const handleNextDay = () => {
-    if (selectedDate) {
-      const newDate = addDays(parseISO(selectedDate), 1);
-      setSelectedDate(format(newDate, 'yyyy-MM-dd'));
-    }
+    setSelectedDate((current) => shiftSchoolDay(current, schoolTimezone, 1));
   };
   return (
-    <Card className="row-span-2 p-6 flex flex-col min-h-0">
+    <Card className="row-span-2 p-6 flex flex-col min-h-0 w-full sm:w-75 lg:w-100">
       <TypographyH2 className="mb-4">{t('title')}</TypographyH2>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between gap-4">
         <ButtonGroup>
           <ButtonGroup>
             <Button variant="outline" size="icon" onClick={handlePreviousDay}>
@@ -72,31 +90,34 @@ export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
             </Button>
           </ButtonGroup>
           <AnimatePresence initial={false} mode="wait">
-            {selectedDate !== normalizedToday && (
+            {!isTodaySelected && (
               <motion.div
                 key="today-btn"
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 4 }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
               >
                 <ButtonGroup>
                   <Button variant="outline" onClick={handleToday}>
-                    <TypographyMedium>Dzisiaj</TypographyMedium>
+                    <TypographyMedium>{t('today')}</TypographyMedium>
                   </Button>
                 </ButtonGroup>
               </motion.div>
             )}
           </AnimatePresence>
         </ButtonGroup>
-        <TypographyLead>{formattedDate}</TypographyLead>
+        <div className="flex flex-col items-end text-right leading-tight">
+          <TypographyLarge>{formattedDay}</TypographyLarge>
+          <TypographyMuted>{formattedDate}</TypographyMuted>
+        </div>
       </div>
       <div className="flex flex-col overflow-y-auto gap-2">
         {todaysLessons.length > 0 ?
           todaysLessons.map((lesson) => (
             <LessonItem key={lesson.id} lesson={lesson} />
           ))
-        : <p className="text-gray-500">Brak lekcji na dzisiaj</p>}
+        : <p className="text-gray-500">{t('empty')}</p>}
       </div>
     </Card>
   );
