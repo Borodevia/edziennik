@@ -4,19 +4,45 @@
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
+multi-ecosystem-groups:
+  github:
+    assignees: ['@Kjur0']
+    open-pull-requests-limit: 1
+    commit-message:
+      prefix: 'gh'
+    schedule:
+      interval: 'weekly'
 updates:
-  - package-ecosystem: 'bun' # See documentation for possible values
+  - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
       interval: 'weekly'
     open-pull-requests-limit: 2
+    commit-message:
+      prefix: ''
+      prefix-development: 'dev'
+    groups:
+      security:
+        applies-to: security-updates
+        patterns: ['*']
+      dev-dependencies:
+        dependency-type: 'development'
+        applies-to: version-updates
+      radix-ui:
+        dependency-type: 'production'
+        applies-to: version-updates
+        patterns: ['@radix-ui/*']
+      dependencies:
+        dependency-type: 'production'
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: 'devcontainers' # See documentation for possible values
     directory: '/' # Location of package manifests
-    schedule:
-      interval: 'weekly'
-    open-pull-requests-limit: 1
+    multi-ecosystem-group: github
+    patterns: ["*"]
   - package-ecosystem: 'github-actions'
     directory: '/'
-    schedule:
-      interval: 'weekly'
-    open-pull-requests-limit: 1
+    multi-ecosystem-group: github
+    patterns: ["*"]
