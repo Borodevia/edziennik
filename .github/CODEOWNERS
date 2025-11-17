@@ -1,0 +1,20 @@
+# Dashboard
+/src/app/dashboard/page.tsx @Milosz-20
+
+# Schedule
+/src/components/exams/* @Milosz-20
+/src/components/schedule/* @Milosz-20
+/src/types/schedule.ts
+
+# Sidebar
+/src/components/sidebar/* @Kjur0
+
+
+
+
+
+
+
+
+# Default (due to GOVERNANCE)
+* @Kjur0
