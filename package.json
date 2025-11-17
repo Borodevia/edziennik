@@ -37,9 +37,9 @@
   "scripts": {
     "build": "next build --turbopack",
     "dev": "next dev --turbopack",
+    "fmt": "prettier --write .",
     "lint": "eslint",
-    "start": "next start",
-    "format": "prettier --write ."
+    "start": "next start"
   },
   "version": "0.1.0"
 }
