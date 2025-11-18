@@ -36,13 +36,13 @@ updates:
         dependency-type: 'production'
         applies-to: version-updates
         update-types:
-          - "minor"
-          - "patch"
+          - 'minor'
+          - 'patch'
   - package-ecosystem: 'devcontainers' # See documentation for possible values
     directory: '/' # Location of package manifests
     multi-ecosystem-group: github
-    patterns: ["*"]
+    patterns: ['*']
   - package-ecosystem: 'github-actions'
     directory: '/'
     multi-ecosystem-group: github
-    patterns: ["*"]
+    patterns: ['*']

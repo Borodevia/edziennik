@@ -1,4 +1,7 @@
 {
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.codeActionsOnSave": {
     "source.addMissingImports": "always",
     "source.fixAll.eslint": "always",
@@ -18,18 +21,14 @@
   "files.encoding": "utf8",
   "files.eol": "\n",
   "git.autofetch": true,
-  "search.exclude": {
-    "**/.vscode": true,
-    "**/node_modules": true
-  },
-  "search.useGlobalIgnoreFiles": true,
-  "search.useParentIgnoreFiles": true,
-  "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "prettier.arrowParens": "always",
   "prettier.bracketSameLine": false,
   "prettier.bracketSpacing": true,
+  "prettier.configPath": ".prettierrc",
+  "prettier.embeddedLanguageFormatting": "auto",
   "prettier.enable": true,
+  "prettier.endOfLine": "lf",
+  "prettier.experimentalTernaries": true,
   "prettier.jsxSingleQuote": false,
   "prettier.printWidth": 80,
   "prettier.quoteProps": "as-needed",
@@ -38,7 +37,10 @@
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
   "prettier.useTabs": false,
-  "prettier.embeddedLanguageFormatting": "auto",
-  "prettier.experimentalTernaries": true,
-  "prettier.configPath": ".prettierrc"
+  "search.exclude": {
+    "**/.vscode": true,
+    "**/node_modules": true
+  },
+  "search.useGlobalIgnoreFiles": true,
+  "search.useParentIgnoreFiles": true
 }

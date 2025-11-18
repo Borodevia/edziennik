@@ -162,7 +162,6 @@ export const mockScheduleData: ScheduleData = {
       teacher: 'T. Wójcik',
       subject: 'Zajęcia sportowe',
     },
-
   ],
   exceptions: [
     {
