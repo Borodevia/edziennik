@@ -232,7 +232,12 @@ const gradesData: GradesDataType = [
 export default function Home(): ReactElement {
   const subjectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const getScrollToFn = (idx: number) => () => {};
+  const getScrollToFn = (idx: number) => () => {
+    const ref = subjectRefs.current[idx];
+    if (ref) {
+      ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <LayoutGroup>
