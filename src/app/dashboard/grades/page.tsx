@@ -5,30 +5,9 @@ import type { ReactElement } from 'react';
 import Subject from '@/components/grades/subject';
 import { LayoutGroup, motion } from 'motion/react';
 import { useRef } from 'react';
+import { GradesDataType } from '../../types/grade';
 
-export type Grade = {
-  value: number;
-  description: string;
-  category:
-    | 'Kartkówka'
-    | 'Sprawdzian'
-    | 'Odpowiedź ustna'
-    | 'Projekt'
-    | 'Laboratorium'
-    | 'Prezentacja'
-    | 'Zadanie domowe'
-    | 'Wypracowanie'
-    | 'Praca domowa';
-  teacher?: string;
-  date?: string;
-};
 
-export type SubjectGrades = {
-  subject: string;
-  grades: Grade[];
-};
-
-export type GradesDataType = SubjectGrades[];
 
 const gradesData: GradesDataType = [
   {
