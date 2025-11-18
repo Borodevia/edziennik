@@ -33,7 +33,7 @@ export default function SubjectsClient({ items }: Props): ReactElement {
             <Subject
               item={item}
               idx={idx}
-              key={idx}
+              key={item.subject}
               scrollToMe={getScrollToFn(idx)}
               subjectRef={refObj}
             />
