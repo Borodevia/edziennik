@@ -4,7 +4,8 @@ import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { motion } from 'motion/react';
 
-import type { SubjectGrades } from '@/app/dashboard/grades/page';
+import type { SubjectGrades } from '@/app/dashboard/grades/types/grade';
+
 import {
   Table,
   TableBody,

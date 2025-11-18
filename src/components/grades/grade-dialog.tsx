@@ -13,7 +13,7 @@ import {
 import { stylesFor } from '@/lib/categoryStyles';
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 
-import type { Grade } from '@/app/dashboard/grades/page';
+import type { Grade } from '@/app/dashboard/grades/types/grade';
 
 type Props = {
   open: boolean;
