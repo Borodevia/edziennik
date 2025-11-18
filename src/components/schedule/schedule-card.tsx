@@ -1,16 +1,20 @@
 'use client';
 import { Card } from '@/components/ui/card';
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import {
   TypographyH2,
   TypographyLarge,
-  TypographyMedium,
   TypographyMuted,
 } from '@/components/ui/typography';
 import { useSchedule } from '@/hooks/use-schedule';
 import { ScheduleData } from '@/types/schedule';
 import { addDays, format, parseISO } from 'date-fns';
 import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Undo } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
@@ -99,9 +103,16 @@ export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
                 transition={{ duration: 0.15, ease: 'easeOut' }}
               >
                 <ButtonGroup>
-                  <Button variant="outline" onClick={handleToday}>
-                    <TypographyMedium>{t('today')}</TypographyMedium>
-                  </Button>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Button variant="outline" onClick={handleToday}>
+                        <Undo />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{t('today')}</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </ButtonGroup>
               </motion.div>
             )}
