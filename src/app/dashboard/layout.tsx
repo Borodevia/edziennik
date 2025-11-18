@@ -45,7 +45,9 @@ export default function Page({
             </Breadcrumb>
           </div>
         </header>
-      {children}
+        <div className="flex-1 p-4">
+          {children}
+        </div>
       </SidebarInset>
 
     </SidebarProvider>
