@@ -21,7 +21,7 @@ export function MailSidebar({
   return (
     <Sidebar collapsible="none" {...props}>
       <SidebarRail />
-      <SidebarHeader className="gap-3.5  p-4">
+      <SidebarHeader className="gap-3.5 p-4">
         <h1 className="text-foreground text-base font-medium">
           {boxToTitle(box)}
         </h1>

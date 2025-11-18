@@ -33,9 +33,7 @@ export default function NotFound() {
           </CardDescription>
         </CardContent>
         <CardFooter>
-          <CardAction className="mx-auto">
-            <Button onClick={goBack}>Go Back</Button>
-          </CardAction>
+          <Button className="mx-auto" onClick={goBack}>Go Back</Button>
         </CardFooter>
       </Card>
     </div>
