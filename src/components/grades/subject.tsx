@@ -137,7 +137,7 @@ function Subject({
                           transition={{
                             delay: 0.1 * gidx * Math.max(0.3, 1 - gidx * 0.1),
                           }}
-                          className={`duration-${gidx}, ${getStyles(grade.category).rowClasses} `}
+                          className={`${getStyles(grade.category).rowClasses} `}
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
