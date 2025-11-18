@@ -143,6 +143,20 @@ function Subject({
                             e.preventDefault();
                             openDialogFor(gidx);
                           }}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (
+                              e.key === 'Enter' ||
+                              e.key === ' ' ||
+                              e.keyCode === 13 ||
+                              e.keyCode === 32
+                            ) {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              openDialogFor(gidx);
+                            }
+                          }}
                         >
                           <TableCell
                             className={`cursor-pointer ${getStyles(grade.category).rowAccentClasses} `}
