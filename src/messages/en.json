@@ -1,0 +1,11 @@
+{
+  "GradeDialog": {
+    "description": "List of grades and details for the selected grade",
+    "grades": "Grades",
+    "details": "Grade details",
+    "noTeacher": "No teacher",
+    "noDescription": "No description.",
+    "noSelected": "No grade selected",
+    "close": "Close"
+  }
+}

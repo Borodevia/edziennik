@@ -1,0 +1,11 @@
+{
+  "GradeDialog": {
+    "description": "Lista ocen oraz szczegóły wybranej oceny",
+    "grades": "Oceny",
+    "details": "Szczegóły oceny",
+    "noTeacher": "Brak nauczyciela",
+    "noDescription": "Brak opisu.",
+    "noSelected": "Brak wybranej oceny",
+    "close": "Zamknij"
+  }
+}

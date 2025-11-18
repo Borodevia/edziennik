@@ -12,6 +12,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { stylesFor } from '@/lib/categoryStyles';
+import { cn, gradeButton } from '@/lib/classnames';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 
 import type { Grade } from '@/app/dashboard/grades/types/grade';
@@ -31,6 +33,7 @@ export default function GradeDialog({
   grades,
   initialIndex = 0,
 }: Props): ReactElement {
+  const t = useTranslations('GradeDialog');
   const [selected, setSelected] = useState<number | null>(
     grades.length ? initialIndex : null
   );
@@ -42,10 +45,10 @@ export default function GradeDialog({
   const detailsRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (open) {
-      const t = setTimeout(() => {
+      const timer = setTimeout(() => {
         detailsRef.current?.focus();
       }, 10);
-      return () => clearTimeout(t);
+      return () => clearTimeout(timer);
     }
   }, [open]);
 
@@ -59,14 +62,12 @@ export default function GradeDialog({
       <DialogContent className="max-w-6xl sm:max-w-4xl">
         <DialogHeader>
           <DialogTitle>{subject}</DialogTitle>
-          <DialogDescription>
-            Lista ocen oraz szczegóły wybranej oceny
-          </DialogDescription>
+          <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
         <div className="grid gap-6 md:grid-cols-[36%_64%] max-h-[80vh] overflow-hidden">
           <Card className="p-4 sm:p-3 overflow-auto min-h-[200px]">
             <div className="mb-2 text-sm font-medium text-muted-foreground">
-              Oceny
+              {t('grades')}
             </div>
             <div className="flex flex-col gap-2">
               {grades.map((g, i) => {
@@ -79,15 +80,18 @@ export default function GradeDialog({
                       setSelected(i);
                     }}
                     aria-pressed={i === selected}
-                    className={`w-full text-left inline-flex items-center gap-4 rounded-lg px-3 py-2 transition-colors border ${
-                      i === selected ?
-                        `border-border bg-muted/70 ${s.selectedTintClasses}`
-                      : 'border-transparent hover:bg-muted/30'
-                    } focus:outline-none focus-visible:ring-2  ${s.focusRingClass}`}
+                    className={cn(
+                      gradeButton({ selected: i === selected }),
+                      s.selectedTintClasses,
+                      s.focusRingClass
+                    )}
                   >
                     <Badge
                       variant="outline"
-                      className={`font-semibold text-base p-0 w-10 h-10 flex items-center justify-center ${s.badgeClasses}`}
+                      className={cn(
+                        'font-semibold text-base p-0 w-10 h-10 flex items-center justify-center',
+                        s.badgeClasses
+                      )}
                     >
                       {g.value}
                     </Badge>
@@ -110,7 +114,7 @@ export default function GradeDialog({
 
           <Card className="p-8 sm:p-6 overflow-auto min-h-[200px]">
             <div className="mb-2 text-sm font-medium text-muted-foreground">
-              Szczegóły oceny
+              {t('details')}
             </div>
             {current ?
               <div className="grid gap-4">
@@ -120,7 +124,10 @@ export default function GradeDialog({
                   tabIndex={-1}
                 >
                   <div
-                    className={`text-8xl sm:text-6xl font-extrabold leading-none w-28 flex items-center justify-center ${getStyles(current?.category).bigGradeClass}`}
+                    className={cn(
+                      'text-8xl sm:text-6xl font-extrabold leading-none w-28 flex items-center justify-center',
+                      getStyles(current?.category).bigGradeClass
+                    )}
                   >
                     {current.value}
                   </div>
@@ -129,30 +136,27 @@ export default function GradeDialog({
                       {current.category}
                     </div>
                     <div className="mt-1 text-sm text-muted-foreground truncate">
-                      {current.teacher ?? 'Brak nauczyciela'}
+                      {current.teacher ?? t('noTeacher')}
                     </div>
                     <div className="text-sm text-muted-foreground">
                       {current.date ?? ''}
                     </div>
                     <div className="mt-4 text-sm leading-relaxed whitespace-pre-wrap">
-                      {current.description || 'Brak opisu.'}
+                      {current.description || t('noDescription')}
                     </div>
                   </div>
                 </div>
               </div>
             : <div className="text-sm text-muted-foreground">
-                Brak wybranej oceny
+                {t('noSelected')}
               </div>
             }
           </Card>
         </div>
 
         <DialogFooter>
-          <Button
-            variant="outline"
-            onClick={() => onOpenChangeAction(false)}
-          >
-            Zamknij
+          <Button variant="outline" onClick={() => onOpenChangeAction(false)}>
+            {t('close')}
           </Button>
         </DialogFooter>
       </DialogContent>

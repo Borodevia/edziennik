@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
+import { IntlProvider } from 'next-intl';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -23,18 +24,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const messages = require('../messages/en.json');
+
   return (
     <html lang="en">
       <head />
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <IntlProvider locale="en" messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </IntlProvider>
       </body>
     </html>
   );
