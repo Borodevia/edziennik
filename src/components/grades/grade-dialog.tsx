@@ -74,7 +74,7 @@ export default function GradeDialog({
                 const s = getStyles(g.category);
                 return (
                   <button
-                    key={i}
+                    key={`${g.value}-${g.date}-${g.category}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelected(i);
