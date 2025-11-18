@@ -294,7 +294,7 @@ type DayKey = keyof typeof data.timetable;
 
 const generateTimetable = function (day: DayKey) {
   const lessons = data.timetable[day];
-  if (!lessons || lessons.length == 0)
+  if (!lessons || lessons.length === 0)
     return { hours: [], lessons: [], totalHeight: 0 };
 
   const startMinutes = Math.min(
