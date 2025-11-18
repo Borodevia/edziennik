@@ -9,6 +9,7 @@ import {
   TypographyMedium,
   TypographyMuted,
 } from '@/components/ui/typography';
+import { parseTime } from '@/lib/timetable-utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 
@@ -285,11 +286,6 @@ const data = {
   },
 };
 
-const timeToMinutes = function (time: string): number {
-  const [hours, minutes] = time.split(':').map(Number);
-  return hours * 60 + minutes;
-};
-
 type DayKey = keyof typeof data.timetable;
 
 const generateTimetable = function (day: DayKey) {
@@ -298,10 +294,10 @@ const generateTimetable = function (day: DayKey) {
     return { hours: [], lessons: [], totalHeight: 0 };
 
   const startMinutes = Math.min(
-    ...lessons.map((lesson) => timeToMinutes(lesson.startTime))
+    ...lessons.map((lesson) => parseTime(lesson.startTime))
   );
   const endMinutes = Math.max(
-    ...lessons.map((lesson) => timeToMinutes(lesson.endTime))
+    ...lessons.map((lesson) => parseTime(lesson.endTime))
   );
 
   const startHour = Math.floor(startMinutes / 60);
@@ -320,8 +316,8 @@ const generateTimetable = function (day: DayKey) {
   }
 
   const lessonsWithPositions = lessons.map((lesson) => {
-    const lessonStartMinutes = timeToMinutes(lesson.startTime);
-    const lessonEndMinutes = timeToMinutes(lesson.endTime);
+    const lessonStartMinutes = parseTime(lesson.startTime);
+    const lessonEndMinutes = parseTime(lesson.endTime);
 
     const topOffset = (lessonStartMinutes - startMinutes) * pixelsPerMinute;
     const height = (lessonEndMinutes - lessonStartMinutes) * pixelsPerMinute;
