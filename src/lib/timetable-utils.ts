@@ -23,10 +23,16 @@ export function formatTime(minutes: number): string {
 
 // Find earliest time from lesson array
 export function getEarliestTime(lessons: Lesson[]): number {
+  if (lessons.length === 0) {
+    throw new Error("getEarliestTime called with empty lessons array");
+  }
   return Math.min(...lessons.map(lesson => parseTime(lesson.startTime)));
 }
 
 // Find latest time from lesson array
 export function getLatestTime(lessons: Lesson[]): number {
+  if (lessons.length === 0) {
+    throw new Error("getLatestTime called with empty lessons array");
+  }
   return Math.max(...lessons.map(lesson => parseTime(lesson.endTime)));
 }
