@@ -1,6 +1,7 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
   Dialog,
@@ -147,12 +148,12 @@ export default function GradeDialog({
         </div>
 
         <DialogFooter>
-          <button
+          <Button
+            variant="outline"
             onClick={() => onOpenChangeAction(false)}
-            className="ml-auto rounded-md px-4 py-2 bg-muted/20 hover:bg-muted/30 transition-colors cursor-pointer"
           >
             Zamknij
-          </button>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
