@@ -104,7 +104,7 @@ export function ScheduleCard({ scheduleData, todayDate }: ScheduleCardProps) {
               >
                 <ButtonGroup>
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                       <Button variant="outline" onClick={handleToday}>
                         <Undo />
                       </Button>
