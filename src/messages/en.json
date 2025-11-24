@@ -1,11 +1,11 @@
 {
-  "GradeDialog": {
+  "grade-dialog": {
+    "close": "Close",
     "description": "List of grades and details for the selected grade",
-    "grades": "Grades",
     "details": "Grade details",
-    "noTeacher": "No teacher",
-    "noDescription": "No description.",
-    "noSelected": "No grade selected",
-    "close": "Close"
+    "grades": "Grades",
+    "no-description": "No description.",
+    "no-selected": "No grade selected",
+    "no-teacher": "No teacher"
   }
 }
