@@ -24,7 +24,7 @@ body:
         For urgent security vulnerabilities, please refer to our [Security Policy](./security/policy) instead.
         For general inquiries, please use the [general issue template](./issues/new?template=00-general-inquiry.yml).
         For codebase refactoring, please use the [refactoring request template](./issues/new?template=04-refactoring-request.yml).
-        For codebase contributions, please use the [pull request template](./compare).
+        For codebase contributions, please submit [new pull request](./compare).
   - type: checkboxes
     attributes:
       label: Areas

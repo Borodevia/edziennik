@@ -23,7 +23,7 @@ body:
         For bug reports, please use the [bug report template](./issues/new?template=01-bug-report.yml).
         For feature requests, please use the [feature request template](./issues/new?template=02-feature-request.yml).
         For maintenance requests, please use the [maintenance request template](./issues/new?template=03-maintenance-request.yml).
-        For codebase contributions, please use the [pull request template](./compare).
+        For codebase contributions, please submit [new pull request](./compare).
   - type: checkboxes
     attributes:
       label: Refactoring Areas
