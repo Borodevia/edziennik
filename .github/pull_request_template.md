@@ -1,6 +1,7 @@
 #### Related Issues
 
 Resolves #
+Fixes #
 
 ## Description
 
