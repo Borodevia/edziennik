@@ -18,7 +18,7 @@ import { useEffect, useRef, useState, type ReactElement } from 'react';
 
 import type { Grade } from '@/app/dashboard/grades/types/grade';
 
-type Props = {
+type GradeDialogProps = {
   open: boolean;
   onOpenChangeAction: (open: boolean) => void;
   subject: string;
