@@ -1,0 +1,58 @@
+name: Feature request
+description: Suggest a new feature or improvement
+type: Feature
+labels: ['enhancement']
+projects: ['Borodevia/1']
+body:
+  - type: textarea
+    attributes:
+      label: Feature description
+      description: |-
+        Describe the feature or improvement you would like to see.
+        Why is this feature important? How would it benefit users?
+      placeholder: A clear and concise description of the feature or improvement.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Main problem
+      description: |-
+        What is the problem this feature would solve?
+        What is the core issue that needs addressing?
+        What it missing currently?
+      placeholder: 'A clear description of what is the problem?'
+  - type: dropdown
+    attributes:
+      label: Module
+      description: Select the module where you would like to see this feature.
+      multiple: true
+      options:
+        - eDziennik Dashboard
+        - eDziennik Schedule
+        - eDziennik GradeBook
+        - eDziennik Mail
+        - eDziennik Council
+  - type: dropdown
+    attributes:
+      label: User Role
+      description: Select your role in the system.
+      options:
+        - Student
+        - Teacher
+        - Parent
+        - Administrator
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternative solutions
+      description: |-
+        Are there any alternative solutions or workarounds you have considered?
+      placeholder: A clear description of any alternative considered.
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |-
+        Provide any additional context or information that might be relevant to this feature request.
+      placeholder: Any other information you think is important.

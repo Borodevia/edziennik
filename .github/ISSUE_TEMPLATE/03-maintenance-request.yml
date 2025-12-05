@@ -1,0 +1,45 @@
+name: Maintenance request
+description: Report a need for maintenance
+type: Task
+labels: ['maintenance']
+projects: ['Borodevia/1']
+body:
+  - type: markdown
+    attributes:
+      value: |-
+        This form is mostly intended for collaborators and team members, but also system administrators.  
+        If you are an end user experiencing issues, please use the [bug report template](./issues/new?template=01-bug-report.yml) instead.
+
+        Maintenance of the projects include tasks such as:
+
+        - Updating and managing dependencies
+        - System and server upkeeps
+        - Ecosystem health monitoring
+        - System performance optimizations
+        - Security audits and patches
+        - Backup and recovery procedures
+        - CI/CD pipelines
+        - Tools maintenance (e.g., linters, formatters, code analyzers, repository managers)
+
+        For urgent security vulnerabilities, please refer to our [Security Policy](./security/policy) instead.
+        For general inquiries, please use the [general issue template](./issues/new?template=00-general-inquiry.yml).
+        For codebase refactoring, please use the [refactoring request template](./issues/new?template=04-refactoring-request.yml).
+        For codebase contributions, please submit [new pull request](./compare).
+  - type: checkboxes
+    attributes:
+      label: Areas
+      options:
+        - label: GitHub Issues/Projects (templates/forms/labels/milestones)
+        - label: GitHub repo (settings/community standards/PRs/Actions/Wiki/README)
+        - label: GitHub Security/Dependabot
+        - label: GitHub Releases/Packages
+        - label: PNPM (dependencies)
+        - label: Vercel (deployments/domains/analytics)
+        - label: Firebase (projects/hosting/firestore/functions/analytics)
+        - label: Other (please specify in the task description)
+  - type: textarea
+    attributes:
+      label: Task
+      description: Describe the task. And needed maintenance
+    validations:
+      required: true

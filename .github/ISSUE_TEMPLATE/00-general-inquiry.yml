@@ -1,0 +1,19 @@
+name: General inquiry
+description: General questions or inquiries
+labels: ['question']
+body:
+  - type: markdown
+    attributes:
+      value: |-
+        Please use this template for any general questions or inquiries related to the project.  
+        If you have a specific issue or request, please consider using the appropriate template for that purpose.
+  - type: textarea
+    attributes:
+      label: Inquiry Details
+      description: Please provide details about your inquiry.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Contact Information
+      description: (Optional) Provide your email or other contact information if you would like a response
