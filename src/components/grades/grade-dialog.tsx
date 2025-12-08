@@ -25,7 +25,7 @@ import {
   gradeSelectedTintVariants,
 } from './grade-variants';
 
-type Props = {
+type GradeDialogProps = {
   open: boolean;
   onOpenChangeAction: (open: boolean) => void;
   subject: string;
