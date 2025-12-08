@@ -39,7 +39,7 @@ export default function GradeDialog({
   subject,
   grades,
   initialIndex = 0,
-}: Props): ReactElement {
+}: GradeDialogProps): ReactElement {
   const t = useTranslations('grade-dialog');
   const [selected, setSelected] = useState<number | null>(
     grades.length ? initialIndex : null
