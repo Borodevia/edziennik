@@ -7,5 +7,10 @@
     "no-description": "No description.",
     "no-selected": "No grade selected",
     "no-teacher": "No teacher"
+  },
+  "subject": {
+    "grade": "Grade",
+    "category": "Category",
+    "description": "Description"
   }
 }

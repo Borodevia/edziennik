@@ -11,12 +11,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { stylesFor } from '@/lib/categoryStyles';
-import { cn, gradeButton } from '@/lib/classnames';
+import { gradeButton } from '@/lib/classnames';
+import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 
 import type { Grade } from '@/app/dashboard/grades/types/grade';
+import {
+  getGradeColor,
+  gradeBadgeVariants,
+  gradeBigTextVariants,
+  gradeFocusRingVariants,
+  gradeSelectedTintVariants,
+} from './grade-variants';
 
 type Props = {
   open: boolean;
@@ -54,9 +61,6 @@ export default function GradeDialog({
 
   const current = selected !== null ? grades[selected] : undefined;
 
-  // use centralized styles helper
-  const getStyles = (cat?: string) => stylesFor(cat);
-
   return (
     <Dialog open={open} onOpenChange={onOpenChangeAction}>
       <DialogContent className="max-w-6xl sm:max-w-4xl">
@@ -71,7 +75,7 @@ export default function GradeDialog({
             </div>
             <div className="flex flex-col gap-2">
               {grades.map((g, i) => {
-                const s = getStyles(g.category);
+                const color = getGradeColor(g.category);
                 return (
                   <button
                     key={`${g.value}-${g.date}-${g.category}`}
@@ -82,15 +86,15 @@ export default function GradeDialog({
                     aria-pressed={i === selected}
                     className={cn(
                       gradeButton({ selected: i === selected }),
-                      s.selectedTintClasses,
-                      s.focusRingClass
+                      gradeSelectedTintVariants({ color }),
+                      gradeFocusRingVariants({ color })
                     )}
                   >
                     <Badge
                       variant="outline"
                       className={cn(
                         'font-semibold text-base p-0 w-10 h-10 flex items-center justify-center',
-                        s.badgeClasses
+                        gradeBadgeVariants({ color })
                       )}
                     >
                       {g.value}
@@ -104,7 +108,7 @@ export default function GradeDialog({
                       </div>
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {g.date ?? ''}
+                      {g.date ? new Date(g.date).toLocaleDateString() : ''}
                     </div>
                   </button>
                 );
@@ -126,7 +130,9 @@ export default function GradeDialog({
                   <div
                     className={cn(
                       'text-8xl sm:text-6xl font-extrabold leading-none w-28 flex items-center justify-center',
-                      getStyles(current?.category).bigGradeClass
+                      gradeBigTextVariants({
+                        color: getGradeColor(current?.category),
+                      })
                     )}
                   >
                     {current.value}
@@ -139,7 +145,9 @@ export default function GradeDialog({
                       {current.teacher ?? t('noTeacher')}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      {current.date ?? ''}
+                      {current.date ?
+                        new Date(current.date).toLocaleDateString()
+                      : ''}
                     </div>
                     <div className="mt-4 text-sm leading-relaxed whitespace-pre-wrap">
                       {current.description || t('noDescription')}

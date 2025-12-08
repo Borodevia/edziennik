@@ -7,5 +7,10 @@
     "noDescription": "Brak opisu.",
     "noSelected": "Brak wybranej oceny",
     "close": "Zamknij"
+  },
+  "subject": {
+    "grade": "Ocena",
+    "category": "Kategoria",
+    "description": "Opis"
   }
 }

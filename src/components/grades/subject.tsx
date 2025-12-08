@@ -13,12 +13,20 @@ import {
   TableFooter,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from '@/components/ui/table';
-import { stylesFor } from '@/lib/categoryStyles';
+import { cn } from '@/lib/utils';
+
+import { useTranslations } from 'next-intl';
 import { useState, type ReactElement } from 'react';
 import { Card } from '../ui/card';
 import GradeDialog from './grade-dialog';
+import {
+  getGradeColor,
+  gradeBadgeVariants,
+  gradeRowAccentVariants,
+  gradeRowVariants,
+} from './grade-variants';
 
 type SubjectProps = {
   item: SubjectGrades;
@@ -33,8 +41,9 @@ function Subject({
   scrollToMe,
   subjectRef,
 }: SubjectProps): ReactElement {
+  const t = useTranslations('subject');
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const MotionTableRow = motion(TableRow);
+  const MotionTableRow = motion.create(TableRow);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [dialogSelected, setDialogSelected] = useState<number>(0);
   const [disableRowAnim, setDisableRowAnim] = useState<boolean>(false);
@@ -72,13 +81,11 @@ function Subject({
     }
   };
 
-  const openDialogFor = (idx: number) => {
-    setDialogSelected(idx);
+  const openDialogFor = (index: number) => {
+    setDialogSelected(index);
     setDisableRowAnim(true);
     setDialogOpen(true);
   };
-
-  const getStyles = (cat?: string) => stylesFor(cat);
 
   return (
     <motion.div
@@ -120,57 +127,63 @@ function Subject({
                   <Table className="w-full overflow-hidden">
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Ocena</TableHead>
-                        <TableHead>Kategoria</TableHead>
-                        <TableHead>Opis</TableHead>
+                        <TableHead>{t('grade')}</TableHead>
+                        <TableHead>{t('category')}</TableHead>
+                        <TableHead>{t('description')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {item.grades.map((grade, gidx) => (
-                        <MotionTableRow
-                          key={gidx}
-                          initial={
-                            disableRowAnim ? false : { opacity: 0, x: -10 }
-                          }
-                          animate={{ opacity: 1, x: 0 }}
-                          layout={!disableRowAnim}
-                          transition={{
-                            delay: 0.1 * gidx * Math.max(0.3, 1 - gidx * 0.1),
-                          }}
-                          className={`${getStyles(grade.category).rowClasses} `}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            openDialogFor(gidx);
-                          }}
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={(e) => {
-                            if (
-                              e.key === 'Enter' ||
-                              e.key === ' ' ||
-                              e.keyCode === 13 ||
-                              e.keyCode === 32
-                            ) {
+                      {item.grades.map((grade, gidx) => {
+                        const color = getGradeColor(grade.category);
+                        return (
+                          <MotionTableRow
+                            key={grade.id}
+                            initial={
+                              disableRowAnim ? false : { opacity: 0, x: -10 }
+                            }
+                            animate={{ opacity: 1, x: 0 }}
+                            layout={!disableRowAnim}
+                            transition={{
+                              delay: 0.1 * gidx * Math.max(0.3, 1 - gidx * 0.1),
+                            }}
+                            className={gradeRowVariants({ color })}
+                            onClick={(e) => {
                               e.stopPropagation();
                               e.preventDefault();
                               openDialogFor(gidx);
-                            }
-                          }}
-                        >
-                          <TableCell
-                            className={`cursor-pointer ${getStyles(grade.category).rowAccentClasses} `}
+                            }}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                              if (
+                                e.key === 'Enter' ||
+                                e.key === ' ' ||
+                                e.keyCode === 13 ||
+                                e.keyCode === 32
+                              ) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                openDialogFor(gidx);
+                              }
+                            }}
                           >
-                            {grade.value}
-                          </TableCell>
-                          <TableCell className="cursor-pointer px-2 py-1">
-                            {grade.category}
-                          </TableCell>
-                          <TableCell className="cursor-pointer">
-                            {grade.description}
-                          </TableCell>
-                        </MotionTableRow>
-                      ))}
+                            <TableCell
+                              className={cn(
+                                'cursor-pointer',
+                                gradeRowAccentVariants({ color })
+                              )}
+                            >
+                              {grade.value}
+                            </TableCell>
+                            <TableCell className="cursor-pointer px-2 py-1">
+                              {grade.category}
+                            </TableCell>
+                            <TableCell className="cursor-pointer">
+                              {grade.description}
+                            </TableCell>
+                          </MotionTableRow>
+                        );
+                      })}
                     </TableBody>
                     <TableFooter></TableFooter>
                   </Table>
@@ -178,7 +191,7 @@ function Subject({
               </motion.div>
             : <motion.ul layout className="list-none flex gap-2.5 flex-wrap">
                 {item.grades.map((grade, gidx) => (
-                  <li key={gidx} className="">
+                  <li key={grade.id} className="">
                     <motion.span
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -192,9 +205,12 @@ function Subject({
                       <Badge
                         asChild={false}
                         variant="outline"
-                        className={`font-semibold text-sm p-3 aspect-square rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition duration-150 ${
-                          getStyles(grade.category).badgeClasses
-                        }`}
+                        className={cn(
+                          'font-semibold text-sm p-3 aspect-square rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition duration-150',
+                          gradeBadgeVariants({
+                            color: getGradeColor(grade.category),
+                          })
+                        )}
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
