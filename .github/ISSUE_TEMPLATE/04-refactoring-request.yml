@@ -1,0 +1,59 @@
+name: Refactoring request
+description: Request for codebase refactoring
+type: Task
+labels: ['refactor']
+projects: ['Borodevia/1']
+body:
+  - type: markdown
+    attributes:
+      value: |-
+        This form is intended for collaborators and team members who wish to request refactoring of the codebase.
+
+        Refactoring includes tasks such as:
+        - Improving code structure and organization
+        - Enhancing code readability and maintainability
+        - Reducing technical debt
+        - Optimizing performance without changing functionality
+        - Updating code to follow best practices and coding standards
+        - Modularizing code for better reusability
+        - Simplifying complex code segments
+        - Removing redundant or dead code
+
+        For general inquiries, please use the [general issue template](./issues/new?template=/00-general-inquiry.yml).
+        For bug reports, please use the [bug report template](./issues/new?template=01-bug-report.yml).
+        For feature requests, please use the [feature request template](./issues/new?template=02-feature-request.yml).
+        For maintenance requests, please use the [maintenance request template](./issues/new?template=03-maintenance-request.yml).
+        For codebase contributions, please submit [new pull request](./compare).
+  - type: checkboxes
+    attributes:
+      label: Refactoring Areas
+      options:
+        - label: Code Structure and Organization
+        - label: Code Readability and Maintainability
+        - label: Performance Optimization
+        - label: Best Practices and Coding Standards
+        - label: Modularization and Reusability
+        - label: Simplification of Complex Code
+        - label: Removal of Redundant or Dead Code
+        - label: Other (please specify in the description)
+  - type: textarea
+    attributes:
+      label: Refactoring Description
+      description: |-
+        Describe the specific areas of the codebase that you believe require refactoring.
+        What improvements are you seeking? Why is this refactoring important?
+      placeholder: A clear description of the refactoring needed.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Codebase Location
+      description: |-
+        Specify the files, modules, or components that need refactoring.
+      placeholder: 'E.g., src/components/UserProfile.js, src/utils/api.js'
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: |-
+        Provide any additional context or information that might be relevant to this refactoring request.
+      placeholder: Any other information you think is important.
